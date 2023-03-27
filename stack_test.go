@@ -11,7 +11,7 @@ import (
 func TestStackError(t *testing.T) {
 	t.Run("simple", func(t *testing.T) {
 		gerr := New("abc")
-		serr := GetStack(gerr)
+		serr := Get(gerr)
 		require.NotNil(t, serr)
 
 		fmt.Println(serr.Print())
@@ -27,7 +27,7 @@ func TestStackError(t *testing.T) {
 		gerr := Ret(err)
 		require.ErrorIs(t, gerr, err)
 
-		serr := GetStack(gerr)
+		serr := Get(gerr)
 		require.NotNil(t, serr)
 
 		fmt.Println(serr.Print())
@@ -41,7 +41,7 @@ func TestStackError(t *testing.T) {
 		gerr := Ret(makeErr(err))
 		require.ErrorIs(t, gerr, err)
 
-		serr := GetStack(gerr)
+		serr := Get(gerr)
 		require.NotNil(t, serr)
 
 		fmt.Println(serr.Print())
