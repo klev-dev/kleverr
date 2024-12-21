@@ -15,6 +15,7 @@ func TestStackError(t *testing.T) {
 		require.NotNil(t, serr)
 
 		fmt.Println(serr.Print())
+		require.Contains(t, serr.Print(), "stack_test")
 	})
 
 	t.Run("nowrap", func(t *testing.T) {
@@ -31,6 +32,7 @@ func TestStackError(t *testing.T) {
 		require.NotNil(t, serr)
 
 		fmt.Println(serr.Print())
+		require.Contains(t, serr.Print(), "stack_test")
 	})
 
 	t.Run("mwrap", func(t *testing.T) {
@@ -45,5 +47,17 @@ func TestStackError(t *testing.T) {
 		require.NotNil(t, serr)
 
 		fmt.Println(serr.Print())
+	})
+	t.Run("nwrap", func(t *testing.T) {
+		err := errors.New("cde")
+		str, gerr := Ret1[string](err)
+		require.ErrorIs(t, gerr, err)
+		require.Zero(t, str)
+
+		serr := Get(gerr)
+		require.NotNil(t, serr)
+
+		fmt.Println(serr.Print())
+		require.Contains(t, serr.Print(), "stack_test")
 	})
 }

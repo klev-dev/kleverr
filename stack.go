@@ -92,18 +92,18 @@ func Ret(err error) error {
 
 func Ret1[X any](err error) (X, error) {
 	var x X
-	return x, newStackError(err, 1)
+	return x, newStackError(err, 0)
 }
 
 func Ret2[X any, Y any](err error) (X, Y, error) {
 	var x X
 	var y Y
-	return x, y, newStackError(err, 1)
+	return x, y, newStackError(err, 0)
 }
 
 func Ret3[X any, Y any, Z any](err error) (X, Y, Z, error) {
 	var x X
 	var y Y
 	var z Z
-	return x, y, z, newStackError(err, 1)
+	return x, y, z, newStackError(err, 0)
 }
