@@ -78,6 +78,10 @@ func Get(err error) *StackError {
 	return nil
 }
 
+func Ret(err error) error {
+	return newStackError(err, 0)
+}
+
 func New(m string) error {
 	return newStackError(errors.New(m), 0)
 }
@@ -86,24 +90,38 @@ func Newf(m string, args ...any) error {
 	return newStackError(fmt.Errorf(m, args...), 0)
 }
 
-func Ret(err error) error {
-	return newStackError(err, 0)
-}
-
-func Ret1[X any](err error) (X, error) {
-	var x X
+func Ret1[X any](err error) (x X, serr error) {
 	return x, newStackError(err, 0)
 }
 
-func Ret2[X any, Y any](err error) (X, Y, error) {
-	var x X
-	var y Y
+func New1[X any](m string) (x X, serr error) {
+	return x, newStackError(errors.New(m), 0)
+}
+
+func New1f[X any](m string, args ...any) (x X, serr error) {
+	return x, newStackError(fmt.Errorf(m, args...), 0)
+}
+
+func Ret2[X any, Y any](err error) (x X, y Y, serr error) {
 	return x, y, newStackError(err, 0)
 }
 
-func Ret3[X any, Y any, Z any](err error) (X, Y, Z, error) {
-	var x X
-	var y Y
-	var z Z
+func New2[X any, Y any](m string) (x X, y Y, serr error) {
+	return x, y, newStackError(errors.New(m), 0)
+}
+
+func New2f[X any, Y any](m string, args ...any) (x X, y Y, serr error) {
+	return x, y, newStackError(fmt.Errorf(m, args...), 0)
+}
+
+func Ret3[X any, Y any, Z any](err error) (x X, y Y, z Z, serr error) {
 	return x, y, z, newStackError(err, 0)
+}
+
+func New3[X any, Y any, Z any](m string) (x X, y Y, z Z, serr error) {
+	return x, y, z, newStackError(errors.New(m), 0)
+}
+
+func New3f[X any, Y any, Z any](m string, args ...any) (x X, y Y, z Z, serr error) {
+	return x, y, z, newStackError(fmt.Errorf(m, args...), 0)
 }

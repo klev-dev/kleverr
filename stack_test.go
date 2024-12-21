@@ -3,6 +3,7 @@ package kleverr
 import (
 	"errors"
 	"fmt"
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -47,6 +48,8 @@ func TestStackError(t *testing.T) {
 		require.NotNil(t, serr)
 
 		fmt.Println(serr.Print())
+		require.Contains(t, serr.Print(), "stack_test")
+		require.True(t, strings.Contains(serr.Print(), "stack_test"))
 	})
 	t.Run("nwrap", func(t *testing.T) {
 		err := errors.New("cde")
